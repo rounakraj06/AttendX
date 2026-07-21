@@ -5,7 +5,11 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from .models import InternalMark
-from .face_recognition import verify_face
+# from .face_recognition import verify_face
+try:
+    from .face_recognition import verify_face
+except ImportError:
+    verify_face = None
 
 from .models import (
     Student,
@@ -871,6 +875,13 @@ def face_attendance(request):
         except AttendanceSession.DoesNotExist:
             messages.error(request, "❌ Attendance session not found.")
             return redirect("student_dashboard")
+        
+        if verify_face is None:
+          messages.error(
+        request,
+        "Face Recognition is temporarily unavailable on the live server."
+        )
+        return redirect("student_dashboard")
 
         matched, message = verify_face(
             student.profile_photo.path,
