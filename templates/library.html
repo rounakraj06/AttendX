@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Library | AttendX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.container{
+max-width:1000px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+color:#2563eb;
+margin-bottom:8px;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:30px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-bottom:35px;
+}
+
+.card{
+background:#f8fafc;
+padding:20px;
+border-radius:10px;
+text-align:center;
+border-left:5px solid #2563eb;
+}
+
+.card h2{
+font-size:30px;
+color:#2563eb;
+margin-bottom:8px;
+}
+
+.card p{
+color:#555;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table th{
+background:#2563eb;
+color:white;
+padding:14px;
+}
+
+table td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+.status-issued{
+color:#16a34a;
+font-weight:600;
+}
+
+.notice{
+margin-top:35px;
+background:#eff6ff;
+padding:20px;
+border-left:5px solid #2563eb;
+border-radius:10px;
+}
+
+.notice h3{
+margin-bottom:10px;
+color:#2563eb;
+}
+
+.notice ul{
+padding-left:20px;
+line-height:30px;
+}
+
+@media(max-width:768px){
+
+.container{
+margin:15px;
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📚 My Library</h1>
+
+<p class="subtitle">
+View all books issued by the library.
+</p>
+
+<div class="cards">
+<div class="card">
+<h2>{{ books|length }}</h2>
+<p>Total Books</p>
+</div>
+
+<div class="card">
+<h2>{{ issued_count }}</h2>
+<p>Books Issued</p>
+</div>
+
+<div class="card">
+<h2>{{ returned_count }}</h2>
+<p>Books Returned</p>
+</div>
+</div>
+
+<h2>Issued Books</h2>
+
+<table>
+
+<tr>
+
+<th>Book Name</th>
+
+<th>Issue Date</th>
+
+<th>Due Date</th>
+
+<th>Status</th>
+
+</tr>
+
+{% if books %}
+
+{% for book in books %}
+
+<tr>
+
+<td>{{ book.book_name }}</td>
+
+<td>{{ book.issue_date|date:"d M Y" }}</td>
+
+<td>{{ book.return_date|date:"d M Y" }}</td>
+
+<td class="status-issued">
+
+{{ book.status }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="4">
+
+No Books Issued
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</table>
+
+<div class="notice">
+
+<h3>Library Notice</h3>
+
+<ul>
+
+<li>Return the book before the due date.</li>
+
+<li>Late return may result in a library fine.</li>
+
+<li>Contact the library if you have any issue.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

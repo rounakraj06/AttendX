@@ -1,0 +1,404 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AttendX | Teacher Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'assets/css/teacher_dashboard.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        <h2>Attend<span>X</span></h2>
+        <p>Faculty Portal</p>
+    </div>
+
+    <ul>
+
+    <li class="active">
+        <a href="{% url 'teacher_dashboard' %}">   
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="/manage_students/">
+            <i class="fa-solid fa-users"></i>
+            <span>Students</span>
+        </a>
+    </li>
+
+    <li>
+    <a href="{% url 'manual_attendance' %}">
+        <i class="fa-solid fa-user-check"></i>
+        <span>Manual Attendance</span>
+    </a>
+</li>
+
+    <li>
+    <a href="{% url 'teacher_marks' %}">
+        <i class="fa-solid fa-file-pen"></i>
+        <span>Internal Marks</span>
+    </a>
+</li>
+
+    <li>
+        <a href="/teacher_library/">
+            <i class="fa-solid fa-book"></i>
+            <span>Library</span>
+        </a>
+    </li>
+
+    <li>
+    <a href="{% url 'teacher_change_password' %}">
+        <i class="fa-solid fa-key"></i>
+        <span>Change Password</span>
+    </a>
+</li>
+
+
+    <li class="logout">
+        <a href="/teacher_login/">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+    </li>
+
+</ul>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<button class="menu-btn">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+<div class="top-left">
+    <h2>👨‍🏫 Good Morning, Faculty</h2>
+    <p>BCA Department</p>
+</div>
+
+<div class="dashboard-info">
+
+    <div class="status-box">
+        <h4>🏫 Department</h4>
+        <p>BCA</p>
+    </div>
+
+</div>
+
+</div>
+
+<!-- Face Attendance Session -->
+
+<div class="session-card">
+
+<h2>📸 Face Attendance Session</h2>
+
+<p>Select Semester, Subject and Period to start attendance.</p>
+
+<form method="POST" action="{% url 'start_attendance' %}">
+
+{% csrf_token %}
+
+<select name="semester" required>
+    <option value="">Select Semester</option>
+    <option value="1">Semester 1</option>
+    <option value="2">Semester 2</option>
+    <option value="3">Semester 3</option>
+    <option value="4">Semester 4</option>
+    <option value="5">Semester 5</option>
+    <option value="6">Semester 6</option>
+</select>
+
+<select name="subject" required id="subject">
+    <option value="">Select Subject</option>
+</select>
+
+<select name="period" required>
+    <option value="">Select Period</option>
+    <option value="1">Period 1 (09:00 - 10:00)</option>
+    <option value="2">Period 2 (10:00 - 11:00)</option>
+    <option value="3">Period 3 (11:15 - 12:15)</option>
+    <option value="4">Period 4 (01:00 - 02:00)</option>
+    <option value="5">Period 5 (02:15 - 03:15)</option>
+</select>
+
+<button type="submit" class="start-btn">
+▶ Start Attendance Session
+</button>
+
+</form>
+
+</div>
+
+<!-- ========================= -->
+<!-- Dashboard Cards -->
+<!-- ========================= -->
+
+<div class="cards">
+
+    <div class="card">
+        <i class="fa-solid fa-users"></i>
+        <h2>{{ total_students }}</h2>
+        <p>Total Students</p>
+    </div>
+
+    <div class="card">
+        <i class="fa-solid fa-book-open"></i>
+        <h2>{{ today_subjects }}</h2>
+        <p>Today's Subjects</p>
+    </div>
+
+    <div class="card">
+        <i class="fa-solid fa-user-check"></i>
+        <h2>{{ attendance_today }}</h2>
+        <p>Attendance Today</p>
+    </div>
+
+    <div class="card">
+        <i class="fa-solid fa-circle-play"></i>
+        <h2>
+{% if active_session %}
+1
+{% else %}
+0
+{% endif %}
+</h2>
+        <p>Active Session</p>
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Today's Schedule -->
+<!-- ========================= -->
+
+<div class="schedule-card">
+
+<h2>📅 Today's Schedule</h2>
+
+<table>
+
+    <tr>
+    <th>Period</th>
+    <th>Subject</th>
+    <th>Time</th>
+    <th>Status</th>
+    </tr>
+
+{% for session in schedules %}
+
+<tr>
+
+<td>{{ session.period }}</td>
+
+<td>{{ session.subject }}</td>
+
+<td>{{ session.start_time|time:"H:i" }} - {{ session.end_time|time:"H:i" }}</td>
+
+<td>
+
+{% if session.active %}
+
+<span class="running">Running</span>
+
+{% else %}
+
+<span class="completed">Completed</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="4">No Schedule Available</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- Quick Actions -->
+<!-- ========================= -->
+
+<div class="quick-actions">
+
+    <div class="action-card">
+        <i class="fa-solid fa-users"></i>
+        <h3>Manage Students</h3>
+        <p>View student list and profiles.</p>
+        <button>Open</button>
+    </div>
+
+    <div class="action-card">
+        <i class="fa-solid fa-file-pen"></i>
+        <h3>Internal Marks</h3>
+        <p>Upload or update internal marks.</p>
+        <button>Open</button>
+    </div>
+
+    <div class="action-card">
+        <i class="fa-solid fa-book"></i>
+        <h3>Library</h3>
+        <p>Issue & Return Library Books.</p>
+        <button>Open</button>
+    </div>
+
+    <div class="action-card">
+        <i class="fa-solid fa-chart-column"></i>
+        <h3>Attendance Report</h3>
+        <p>View attendance records.</p>
+        <button>Open</button>
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Live Attendance Status -->
+<!-- ========================= -->
+<div class="live-session">
+
+<h2>🟢 Live Attendance Status</h2>
+
+{% if active_session %}
+
+<p><strong>Semester :</strong> Semester {{ active_session.semester }}</p>
+
+<p><strong>Subject :</strong> {{ active_session.subject }}</p>
+
+<p><strong>Period :</strong> {{ active_session.period }}</p>
+
+<p><strong>Students Present :</strong> {{ attendance_today }} / {{ total_students }}</p>
+
+<p><strong>Status :</strong> 🟢 Session Running</p>
+
+{% else %}
+
+<p>No Active Attendance Session</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<script src="{% static 'assets/js/teacher_dashboard.js' %}"></script>
+
+<script>
+
+const semesterSubjects = {
+
+1:[
+"Business Communications",
+"Basic Mathematics-I",
+"Business Practices And Management",
+"Introduction to Computer Science",
+"Problem Solving and Programming in C"
+],
+
+2:[
+"Basic Mathematics II",
+"Environmental Science",
+"Database Management System",
+"Object Oriented Programming using C++",
+"Logic Design"
+],
+
+3:[
+"Data Structure using C",
+"Java Programming",
+"Computer Architecture",
+"System Analysis and Design",
+"Probability and Statistics"
+],
+
+4:[
+"Multimedia",
+"Operating System",
+"HTML",
+"Visual Programming",
+"Computer Networks"
+],
+
+5:[
+"Internet Concept and Web Design",
+"Design and Analysis of Algorithms",
+"Linux Programming",
+"Computer Oriented Numerical Methods",
+"Elective I"
+],
+
+6:[
+"Optimization Techniques",
+"Principle of Management",
+"Accounting and Financial Management",
+"Network Security",
+"Elective II"
+]
+
+};
+
+const semester=document.querySelector('select[name="semester"]');
+const subject=document.getElementById("subject");
+
+semester.addEventListener("change",function(){
+
+subject.innerHTML='<option value="">Select Subject</option>';
+
+let list=semesterSubjects[this.value];
+
+if(list){
+
+list.forEach(function(item){
+
+let option=document.createElement("option");
+
+option.value=item;
+
+option.textContent=item;
+
+subject.appendChild(option);
+
+});
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

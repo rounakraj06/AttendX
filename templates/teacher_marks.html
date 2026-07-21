@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Internal Assessment | AttendX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+header{
+background:#2563eb;
+color:#fff;
+padding:25px;
+text-align:center;
+}
+
+header h1{
+font-size:30px;
+}
+
+.container{
+max-width:900px;
+margin:40px auto;
+background:#fff;
+padding:35px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.container h2{
+margin-bottom:10px;
+color:#1e293b;
+}
+
+.container p{
+color:#64748b;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin:18px 0 8px;
+font-weight:600;
+color:#334155;
+}
+
+select,
+input[type="file"]{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:8px;
+font-size:15px;
+outline:none;
+}
+
+button{
+width:100%;
+margin-top:25px;
+padding:14px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+@media(max-width:768px){
+
+.container{
+margin:20px;
+padding:20px;
+}
+
+header h1{
+font-size:24px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📄 Internal Assessment</h1>
+
+</header>
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+    {% if messages %}
+    {% for message in messages %}
+        <div style="
+            background:#dcfce7;
+            color:#166534;
+            padding:12px;
+            margin-bottom:20px;
+            border-radius:8px;
+            text-align:center;
+            font-weight:bold;
+        ">
+            {{ message }}
+
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h2>Upload Internal Marks</h2>
+
+<p>Select the semester, subject and upload the PDF file for students.</p>
+
+<label>Select Semester</label>
+
+<select name="semester" id="semester">
+
+<option value="">Select Semester</option>
+<option value="1">Semester 1</option>
+<option value="2">Semester 2</option>
+<option value="3">Semester 3</option>
+<option value="4">Semester 4</option>
+<option value="5">Semester 5</option>
+<option value="6">Semester 6</option>
+
+</select>
+
+<label>Select Subject</label>
+
+<select name="subject" id="subject">
+
+<option value="">Select Subject</option>
+
+</select>
+
+<label>Choose PDF</label>
+
+<input
+type="file"
+name="pdf"
+accept=".pdf"
+required>
+
+<button type="submit">
+
+<i class="fa-solid fa-upload"></i>
+
+Publish Marks
+
+</button>
+
+</form>
+</div>
+<script>
+
+const semesterSubjects = {
+
+1: [
+"Business Communications",
+"Basic Mathematics-I",
+"Business Practices And Management",
+"Introduction to Computer Science",
+"Problem Solving and Programming in C"
+],
+
+2: [
+"Basic Mathematics II",
+"Environmental Science",
+"Database Management System",
+"Object Oriented Programming using C++",
+"Logic Design"
+],
+
+3: [
+"Data Structure using C",
+"Java Programming",
+"Computer Architecture",
+"System Analysis and Design",
+"Probability and Statistics"
+],
+
+4: [
+"Multimedia",
+"Operating System",
+"HTML",
+"Visual Programming",
+"Computer Networks"
+],
+
+5: [
+"Internet Concept and Web Design",
+"Design and Analysis of Algorithms",
+"Linux Programming",
+"Computer Oriented Numerical Methods",
+"Elective I"
+],
+
+6: [
+"Optimization Techniques",
+"Principle of Management",
+"Accounting and Financial Management",
+"Network Security",
+"Elective II"
+]
+
+};
+
+const semester = document.getElementById("semester");
+const subject = document.getElementById("subject");
+
+semester.addEventListener("change", function(){
+
+subject.innerHTML = '<option value="">Select Subject</option>';
+
+let subjects = semesterSubjects[this.value];
+
+if(subjects){
+
+subjects.forEach(function(item){
+
+let option = document.createElement("option");
+option.value = item;
+option.textContent = item;
+
+subject.appendChild(option);
+
+});
+
+}
+
+});
+
+</script>
+</body>
+
+</html>

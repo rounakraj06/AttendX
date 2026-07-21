@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Library Management | AttendX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+header{
+background:#2563eb;
+color:#fff;
+padding:25px;
+text-align:center;
+}
+
+header h1{
+font-size:30px;
+}
+
+header p{
+margin-top:8px;
+font-size:15px;
+}
+
+.container{
+max-width:900px;
+margin:35px auto;
+background:#fff;
+padding:35px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.container h2{
+margin-bottom:20px;
+color:#1e293b;
+}
+
+label{
+display:block;
+margin:16px 0 8px;
+font-weight:600;
+color:#334155;
+}
+
+select,
+input{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:8px;
+font-size:15px;
+outline:none;
+}
+
+.status-box{
+margin-top:30px;
+background:#eff6ff;
+padding:20px;
+border-radius:10px;
+border-left:5px solid #2563eb;
+}
+
+.status-box h3{
+margin-bottom:10px;
+color:#1e293b;
+}
+
+.status-box p{
+margin:8px 0;
+color:#475569;
+}
+
+@media(max-width:768px){
+
+.container{
+margin:20px;
+padding:20px;
+}
+
+header h1{
+font-size:24px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 Library Management</h1>
+
+<p>Issue and Return Library Books</p>
+
+</header>
+
+<div class="container">
+
+    <form method="POST">
+
+{% csrf_token %}
+
+{% if messages %}
+{% for message in messages %}
+
+<div style="
+background:#dcfce7;
+color:#166534;
+padding:12px;
+margin-bottom:20px;
+border-radius:8px;
+text-align:center;
+font-weight:bold;
+">
+
+{{ message }}
+
+</div>
+
+{% endfor %}
+{% endif %}
+
+<h2>Student Details</h2>
+
+
+
+<label>Roll Number</label>
+
+<input
+type="number"
+name="class_roll_number"
+placeholder="Enter Class Roll Number"
+required>
+
+<h2 style="margin-top:30px;">Book Details</h2>
+
+<label>Book Name</label>
+
+<input
+type="text"
+name="book_name"
+placeholder="Enter Book Name"
+required>
+
+<label>Book ID</label>
+
+<input
+type="text"
+name="book_id"
+placeholder="Enter Book ID"
+required>
+
+<label>Return Date</label>
+
+<input
+type="date"
+name="return_date"
+required>
+
+<div style="display:flex;gap:15px;margin-top:30px;flex-wrap:wrap;">
+
+<button
+type="submit"
+name="action"
+value="issue" style="flex:1;padding:14px;border:none;border-radius:8px;background:#2563eb;color:#fff;font-size:16px;cursor:pointer;">
+
+📚 Issue Book
+
+</button>
+
+<button
+type="submit"
+name="action"
+value="return" style="flex:1;padding:14px;border:none;border-radius:8px;background:#16a34a;color:#fff;font-size:16px;cursor:pointer;">
+
+✅ Return Book
+
+</button>
+
+</div>
+
+<div class="status-box">
+
+<h3>Current Library Status</h3>
+
+<p><strong>Semester :</strong> <span id="semester">-</span></p>
+
+<p><strong>Student :</strong> <span id="student">-</span></p>
+
+<p><strong>Roll Number :</strong> <span id="roll">-</span></p>
+
+<p><strong>Book :</strong> <span id="book">-</span></p>
+
+<p><strong>Status :</strong> <span id="status">No Book Issued</span></p>
+
+</div>
+</form>
+</div>
+
+</body>
+
+</html>

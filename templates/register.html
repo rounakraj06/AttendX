@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AttendX | Student Registration</title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/register.css'%}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<section class="register-section">
+
+<div class="register-container">
+
+<!-- Left Side -->
+
+<div class="register-left">
+
+<h1>Attend<span>X</span></h1>
+
+<h2>Student Registration</h2>
+
+<p>
+Create your AttendX account to access AI Face Attendance,
+Marks, Attendance Reports, Notes and Department Resources.
+</p>
+
+<div class="feature-list">
+
+<p>✅ AI Face Attendance</p>
+
+<p>✅ Student Dashboard</p>
+
+<p>✅ Marks & Attendance</p>
+
+<p>✅ Department Resources</p>
+
+<p>✅ Secure Student Account</p>
+
+</div>
+
+</div>
+
+<!-- Right Side -->
+
+<div class="register-right">
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% if messages %}
+    {% for message in messages %}
+
+        {% if message.tags == "success" %}
+        <div id="message-box" style="background:#d4edda;color:#155724;padding:12px;margin-bottom:15px;border-radius:8px;font-weight:bold;text-align:center;">
+            ✅ {{ message }}
+        </div>
+
+        {% elif message.tags == "error" %}
+        <div id="message-box" style="background:#f8d7da;color:#721c24;padding:12px;margin-bottom:15px;border-radius:8px;font-weight:bold;text-align:center;">
+            ❌ {{ message }}
+        </div>
+
+        {% else %}
+        <div id="message-box" style="background:#fff3cd;color:#856404;padding:12px;margin-bottom:15px;border-radius:8px;font-weight:bold;text-align:center;">
+            ⚠ {{ message }}
+        </div>
+        {% endif %}
+
+    {% endfor %}
+{% endif %}
+
+    <h2>Create Account</h2>
+
+<input type="text"
+name="full_name"
+placeholder="Full Name"
+required>
+
+<input type="text"
+name="university_roll_number"
+placeholder="University Roll Number (optional)"
+maxlength="12"
+minlength="12"
+pattern="[0-9]{12}">
+
+<input type="text"
+name="class_roll_number"
+placeholder="class Roll Number"
+required>
+
+<input type="text"
+name="registration_number"
+placeholder="Registration Number (optional)"
+maxlength="13"
+minlength="13"
+pattern="[0-9]{13}">
+
+
+<input type="date"
+name="date_of_birth"
+required>
+
+<select name="semester" required>
+    <option value="">Select Semester</option>
+    <option value="1">Semester 1</option>
+    <option value="2">Semester 2</option>
+    <option value="3">Semester 3</option>
+    <option value="4">Semester 4</option>
+    <option value="5">Semester 5</option>
+    <option value="6">Semester 6</option>
+</select>
+
+<select name="session" required>
+    <option value="">Select Session</option>
+    <option value="2023-2026">2023-2026</option>
+    <option value="2024-2027">2024-2027</option>
+    <option value="2025-2028">2025-2028</option>
+    <option value="2026-2029">2026-2029</option>
+</select>
+
+<select name="gender" required>
+    <option value="">Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+</select>
+
+
+<input
+type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+name="mobile"
+placeholder="Mobile Number"
+minlength="10"
+maxlength="10"
+required>
+
+<div class="password-box">
+
+<input
+type="password"
+name="password"
+id="password"
+placeholder="Password"
+minlength="8"
+required>
+
+<i class="fa-solid fa-eye"
+id="togglePassword"></i>
+
+</div>
+
+<div class="password-box">
+
+<input
+type="password"
+name="confirm_password"
+id="confirmPassword"
+placeholder="Confirm Password"
+minlength="8"
+required>
+
+<i class="fa-solid fa-eye"
+id="toggleConfirm"></i>
+
+</div>
+
+<label class="checkbox">
+
+<input type="checkbox" required>
+
+I agree to the
+<a href="#">Terms & Conditions</a>
+
+</label>
+
+<button type="submit">
+
+Register
+
+</button>
+
+<p class="login-link">
+
+Already have an account?
+
+<a href="/login/">
+
+Login
+
+</a>
+
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<script src="{% static 'assets/js/register.js'%}"></script>
+
+{% if redirect_to_login %}
+<script>
+setTimeout(function () {
+    window.location.href = "{% url 'login' %}";
+}, 3000);
+</script>
+{% endif %}
+</body>
+
+</html>

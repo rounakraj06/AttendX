@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AttendX | Faculty Login</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:linear-gradient(135deg,#2563eb,#1e293b);
+}
+
+.login-box{
+width:380px;
+background:#fff;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.logo{
+text-align:center;
+margin-bottom:25px;
+}
+
+.logo h1{
+color:#2563eb;
+}
+
+.logo span{
+color:#111827;
+}
+
+.logo p{
+margin-top:8px;
+color:#64748b;
+font-size:14px;
+}
+
+.input-box{
+margin:18px 0;
+}
+
+.input-box label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.input-box input{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:8px;
+outline:none;
+font-size:15px;
+}
+
+.password{
+position:relative;
+}
+
+.password i{
+position:absolute;
+right:15px;
+top:14px;
+cursor:pointer;
+color:#666;
+}
+
+.login-btn{
+width:100%;
+padding:13px;
+margin-top:20px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+.login-btn:hover{
+background:#1d4ed8;
+}
+
+.notice{
+margin-top:20px;
+padding:12px;
+background:#eff6ff;
+border-left:4px solid #2563eb;
+font-size:13px;
+color:#374151;
+border-radius:8px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    
+
+<form method="POST">
+{% csrf_token %}
+{% if messages %}
+    {% for message in messages %}
+        <div style="
+            background:#fee2e2;
+            color:#b91c1c;
+            padding:10px;
+            margin-bottom:15px;
+            border-radius:8px;
+            text-align:center;
+        ">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="logo">
+
+
+
+<h1>Attend<span>X</span></h1>
+
+<p>Authorized Faculty Access Only</p>
+
+</div>
+
+<div class="input-box">
+
+<label>User ID</label>
+
+<input type="text" name="faculty_id" placeholder="Enter Faculty ID">
+
+</div>
+
+<div class="input-box">
+
+<label>Password</label>
+
+<div class="password">
+
+<input type="password" name="password" id="pass" placeholder="Enter Password">
+
+<i class="fa-solid fa-eye" id="eye"></i>
+
+</div>
+
+</div>
+
+<button type="submit" class="login-btn">
+Login
+</button>
+
+<div class="notice">
+
+Only Authorized Teachers can access this Portal.
+
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+
+<small style="color:#6b7280;">
+© 2026 AttendX Faculty Portal
+</small>
+
+</div>
+
+</div>
+</form>
+
+<script>
+
+// ===============================
+// Show / Hide Password
+// ===============================
+
+const eye = document.getElementById("eye");
+const pass = document.getElementById("pass");
+
+eye.addEventListener("click",function(){
+
+if(pass.type==="password"){
+
+pass.type="text";
+
+eye.classList.remove("fa-eye");
+eye.classList.add("fa-eye-slash");
+
+}else{
+
+pass.type="password";
+
+eye.classList.remove("fa-eye-slash");
+eye.classList.add("fa-eye");
+
+}
+
+});
+
+
+</script>
+
+</body>
+
+</html>

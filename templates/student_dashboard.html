@@ -1,0 +1,593 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AttendX | Student Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/student_dashboard.css' %}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ==========================
+     Mobile Menu
+========================== -->
+
+<div class="menu-btn" id="menuBtn">
+    <i class="fa-solid fa-bars"></i>
+</div>
+
+<!-- ==========================
+     Sidebar
+========================== -->
+
+<div class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <h2>Attend<span>X</span></h2>
+        <p>Student Portal</p>
+    </div>
+
+    <ul>
+
+        <li class="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </li>
+
+        <li onclick="window.location.href='/profile/'">
+            <i class="fa-solid fa-user"></i>
+            <span>My Profile</span>
+        </li>
+
+        <!-- <li onclick="document.querySelector('.face-box').scrollIntoView({behavior:'smooth'})">
+            <i class="fa-solid fa-camera"></i>
+            <span>Face Attendance</span>
+        </li> -->
+
+        <li onclick="window.location.href='{% url 'attendance' %}'">
+            <i class="fa-solid fa-chart-column"></i>
+            <span>Attendance Report</span>
+        </li>
+
+        <li onclick="window.location.href='/marks/'">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Marks</span>
+        </li>
+
+        <li onclick="window.location.href='/library/'">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Library</span>
+        </li>
+
+        <li onclick="window.location.href='/login/'">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- ==========================
+     Main Content
+========================== -->
+
+<div class="main">
+
+{% if messages %}
+    {% for message in messages %}
+        <div style="
+            background:#dcfce7;
+            color:#166534;
+            padding:12px;
+            margin-bottom:20px;
+            border-radius:10px;
+            font-weight:600;
+        ">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!-- ==========================
+     Topbar
+========================== -->
+
+<div class="topbar">
+
+    <div class="student-info">
+
+        {% if student.profile_photo %}
+            <img src="{{ student.profile_photo.url }}" alt="Student">
+        {% else %}
+            <img src="{% static 'assets/images/Defaultpic.png' %}" alt="Student">
+        {% endif %}
+
+        <div>
+
+            <h2 id="greeting">
+                👋 Good Morning, {{ student.full_name }}
+            </h2>
+
+            <p>BCA | Semester {{ student.semester }}</p>
+
+        </div>
+
+    </div>
+
+    <div class="time-box">
+
+        <p id="currentDate"></p>
+
+        <h3 id="currentTime"></h3>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     Attendance Summary
+========================== -->
+
+<div class="attendance-box">
+
+    <h3>📊 Today's Attendance</h3>
+
+    <div class="attendance-details">
+
+        <div>
+
+            <h1>{{ attendance_percentage }}%</h1>
+
+            <p>Overall Attendance</p>
+
+        </div>
+
+        <div>
+
+            <p><b>Total Classes :</b> {{ total_classes }}</p>
+
+            <p><b>Attended :</b> {{ present_classes }}</p>
+
+            <p><b>Absent :</b> {{ absent_classes }}</p>
+
+            {% if attendance_percentage >= 75 %}
+
+                <p><b>Status :</b> Eligible ✅</p>
+
+            {% else %}
+
+                <p><b>Status :</b> Not Eligible ❌</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     AI Face Attendance
+========================== -->
+
+<div class="face-box">
+
+    <h2>🤖 AI Face Attendance</h2>
+
+    {% if active_session %}
+
+    <div id="sessionTimer" style="
+        background:#fee2e2;
+        color:#b91c1c;
+        padding:12px;
+        margin:15px 0;
+        border-radius:10px;
+        text-align:center;
+        font-size:18px;
+        font-weight:bold;
+    ">
+        ⏳ Time Left :
+        <span id="timer"></span>
+    </div>
+
+    <p><b>Semester :</b> {{ active_session.semester }}</p>
+
+    <p><b>Subject :</b> {{ active_session.subject }}</p>
+
+    <p><b>Period :</b> {{ active_session.period }}</p>
+
+    <div class="camera-box">
+
+        <div class="camera-circle">
+
+            <video
+                id="video"
+                autoplay
+                playsinline>
+            </video>
+
+        </div>
+
+        <p class="camera-text">
+            😊 Place your face inside the circle
+        </p>
+
+    </div>
+
+    <button
+        type="button"
+        id="captureBtn"
+        class="capture-btn">
+
+        📷 Capture Face
+
+    </button>
+
+    <canvas
+        id="canvas"
+        style="display:none;">
+    </canvas>
+
+    <form
+        id="attendanceForm"
+        method="POST"
+        action="{% url 'face_attendance' %}">
+
+        {% csrf_token %}
+
+        <input
+            type="hidden"
+            name="session_id"
+            value="{{ active_session.id }}">
+
+        <input
+            type="hidden"
+            name="image"
+            id="image">
+
+        <button
+            type="submit"
+            class="scan-btn">
+
+            🤖 Verify & Mark Attendance
+
+        </button>
+
+    </form>
+
+    {% else %}
+
+    <div style="
+        background:#fef2f2;
+        color:#dc2626;
+        padding:15px;
+        border-radius:10px;
+        text-align:center;
+        font-weight:bold;
+    ">
+
+        ❌ No Attendance Session is Active
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<!-- ==========================
+     Quick Access Cards
+========================== -->
+
+<div class="quick-grid">
+
+    <div class="quick-card">
+
+        <i class="fa-solid fa-chart-column"></i>
+
+        <h3>Attendance Report</h3>
+
+        <button
+            onclick="window.location.href='{% url 'attendance' %}'">
+
+            Open
+
+        </button>
+
+    </div>
+
+    <div class="quick-card">
+
+        <i class="fa-solid fa-file-lines"></i>
+
+        <h3>Marks</h3>
+
+        <button
+            onclick="window.location.href='/marks/'">
+
+            Open
+
+        </button>
+
+    </div>
+
+    <div class="quick-card">
+
+        <i class="fa-solid fa-book-open"></i>
+
+        <h3>Library</h3>
+
+        <button
+            onclick="window.location.href='/library/'">
+
+            Open
+
+        </button>
+
+    </div>
+
+    <div class="quick-card">
+
+        <i class="fa-solid fa-user"></i>
+
+        <h3>My Profile</h3>
+
+        <button
+            onclick="window.location.href='/profile/'">
+
+            Open
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     Today's Timetable
+========================== -->
+
+<div class="timetable">
+
+    <h2>📅 Today's Timetable</h2>
+
+    <table>
+        <thead>
+<tr>
+    <th>Period</th>
+    <th>Subject</th>
+    <th>Time</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+        {% for session in schedules %}
+
+        <tr>
+
+            <td>{{ session.period }}</td>
+
+            <td>{{ session.subject }}</td>
+
+            <td>
+
+                {{ session.start_time|time:"H:i" }}
+
+                -
+
+                {{ session.end_time|time:"H:i" }}
+
+            </td>
+
+            <td>
+
+                {% if session.active %}
+
+                    🟢 Running
+
+                {% elif session.end_time < now %}
+
+                    ✅ Completed
+
+                {% else %}
+
+                    ⏳ Upcoming
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="4">
+
+                No Schedule Available
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- ==========================
+     Footer
+========================== -->
+
+<footer style="text-align:center;margin-top:35px;color:#64748b;">
+
+    © 2026 AttendX Student Portal
+
+</footer>
+
+</div>
+
+<script src="{% static 'assets/js/student_dashboard.js' %}"></script>
+
+<script>
+
+/* Greeting */
+
+const greeting=document.getElementById("greeting");
+
+const hour=new Date().getHours();
+
+if(hour<12){
+
+greeting.innerHTML="🌞 Good Morning, {{ student.full_name }}";
+
+}
+
+else if(hour<17){
+
+greeting.innerHTML="☀️ Good Afternoon, {{ student.full_name }}";
+
+}
+
+else{
+
+greeting.innerHTML="🌙 Good Evening, {{ student.full_name }}";
+
+}
+
+
+/* Timer */
+
+{% if active_session %}
+
+const endTime=new Date("{{ active_session.end_time|date:'c' }}").getTime();
+
+function updateTimer(){
+
+const now=new Date().getTime();
+
+const distance=endTime-now;
+
+if(distance<=0){
+
+document.getElementById("timer").innerHTML="Session Expired";
+
+setTimeout(function(){
+
+location.reload();
+
+},1000);
+
+return;
+
+}
+
+const minutes=Math.floor(distance/(1000*60));
+
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("timer").innerHTML=
+
+minutes+"m "+seconds+"s";
+
+}
+
+updateTimer();
+
+setInterval(updateTimer,1000);
+
+{% endif %}
+
+
+/* Camera */
+
+const video=document.getElementById("video");
+
+const canvas=document.getElementById("canvas");
+
+const captureBtn=document.getElementById("captureBtn");
+
+const attendanceForm=document.getElementById("attendanceForm");
+
+const imageInput=document.getElementById("image");
+
+async function startCamera(){
+
+if(!video) return;
+
+try{
+
+const stream=await navigator.mediaDevices.getUserMedia({
+
+video:true
+
+});
+
+video.srcObject=stream;
+
+}
+
+catch(err){
+
+alert("Camera Access Denied!");
+
+console.log(err);
+
+}
+
+}
+
+if(video){
+
+startCamera();
+
+}
+
+
+/* Capture */
+
+if(captureBtn){
+
+captureBtn.addEventListener("click",function(){
+
+canvas.width=video.videoWidth;
+
+canvas.height=video.videoHeight;
+
+const ctx=canvas.getContext("2d");
+
+ctx.drawImage(video,0,0);
+
+imageInput.value=canvas.toDataURL("image/png");
+
+captureBtn.innerHTML="✅ Face Captured";
+
+captureBtn.disabled=true;
+
+attendanceForm.submit();
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

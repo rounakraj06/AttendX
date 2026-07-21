@@ -1,0 +1,1038 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Development Team | AttendX</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#eef3fb;
+color:#222;
+overflow-x:hidden;
+
+}
+
+a{
+text-decoration:none;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+.container{
+
+width:90%;
+max-width:1300px;
+margin:auto;
+
+}
+
+/*==========================
+HERO SECTION
+==========================*/
+
+.hero{
+
+width:100%;
+min-height:430px;
+
+background:
+linear-gradient(135deg,#0d47ff,#2b7cff,#5ea5ff);
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+padding:80px 20px;
+
+color:#fff;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+width:520px;
+height:520px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:50%;
+
+top:-180px;
+left:-180px;
+
+}
+
+.hero::after{
+
+content:"";
+
+position:absolute;
+
+width:430px;
+height:430px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:50%;
+
+bottom:-170px;
+right:-170px;
+
+}
+
+.hero-content{
+
+position:relative;
+z-index:2;
+
+max-width:850px;
+
+}
+
+.hero h1{
+
+font-size:55px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+letter-spacing:1px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+line-height:34px;
+
+opacity:.95;
+
+}
+
+.hero-btn{
+
+display:inline-block;
+
+margin-top:35px;
+
+padding:15px 38px;
+
+background:#fff;
+
+color:#0d47ff;
+
+border-radius:40px;
+
+font-weight:600;
+
+transition:.35s;
+
+}
+
+.hero-btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 18px 35px rgba(0,0,0,.2);
+
+}
+
+/*==========================
+SECTION TITLE
+==========================*/
+
+.section-title{
+
+text-align:center;
+
+margin-bottom:50px;
+
+}
+
+.section-title h2{
+
+font-size:42px;
+
+font-weight:700;
+
+color:#0d47ff;
+
+margin-bottom:15px;
+
+}
+
+.section-title p{
+
+font-size:17px;
+
+color:#666;
+
+line-height:30px;
+
+max-width:750px;
+
+margin:auto;
+
+}
+
+/*==========================
+ABOUT SECTION
+==========================*/
+
+.about{
+
+padding:90px 0;
+
+}
+
+.about-grid{
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:35px;
+
+align-items:stretch;
+
+}
+
+.about-card{
+
+background:rgba(255,255,255,.75);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.6);
+
+border-radius:22px;
+
+padding:35px;
+
+box-shadow:0 18px 45px rgba(13,71,255,.08);
+
+}
+
+.about-card h3{
+
+font-size:30px;
+
+color:#0d47ff;
+
+margin-bottom:20px;
+
+}
+
+.about-card p{
+
+font-size:16px;
+
+line-height:33px;
+
+color:#555;
+
+}
+
+.info-box{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:16px 0;
+
+border-bottom:1px solid #ececec;
+
+}
+
+.info-box:last-child{
+
+border-bottom:none;
+
+}
+
+.info-icon{
+
+width:50px;
+
+height:50px;
+
+border-radius:14px;
+
+background:#edf3ff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:22px;
+
+}
+
+.info-text h4{
+
+font-size:17px;
+
+margin-bottom:4px;
+
+color:#111;
+
+}
+
+.info-text span{
+
+font-size:14px;
+
+color:#666;
+
+}
+
+/*==========================
+TEAM SECTION
+==========================*/
+
+.team{
+
+padding:90px 0;
+
+}
+
+.team-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:30px;
+
+}
+
+.team-card{
+
+background:#fff;
+
+border-radius:24px;
+
+padding:35px 25px;
+
+text-align:center;
+
+transition:.35s;
+
+box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.team-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:6px;
+
+background:linear-gradient(90deg,#0d47ff,#55a6ff);
+
+}
+
+.team-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 25px 60px rgba(13,71,255,.18);
+
+}
+
+.member-photo{
+
+width:135px;
+
+height:135px;
+
+margin:auto;
+
+border-radius:50%;
+
+padding:5px;
+
+background:linear-gradient(135deg,#0d47ff,#69b5ff);
+
+}
+
+.member-photo img{
+
+width:100%;
+
+height:100%;
+
+border-radius:50%;
+
+object-fit:cover;
+
+background:#ddd;
+
+}
+
+.empty-photo{
+
+width:100%;
+
+height:100%;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#eef3fb;
+
+font-size:55px;
+
+color:#9ca8b9;
+
+}
+
+.member-name{
+
+font-size:24px;
+
+font-weight:700;
+
+margin-top:22px;
+
+color:#111;
+
+}
+
+.member-role{
+
+display:inline-block;
+
+margin-top:12px;
+
+padding:8px 20px;
+
+background:#edf3ff;
+
+color:#0d47ff;
+
+border-radius:30px;
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.member-phone{
+
+margin-top:18px;
+
+font-size:15px;
+
+color:#666;
+
+}
+
+/*==========================
+FOOTER
+==========================*/
+
+.footer{
+
+margin-top:90px;
+
+background:#08142d;
+
+color:#fff;
+
+padding:60px 8% 25px;
+
+}
+
+.footer-grid{
+
+display:grid;
+
+grid-template-columns:2fr 1fr 1fr;
+
+gap:40px;
+
+}
+
+.footer h3{
+
+margin-bottom:18px;
+
+font-size:24px;
+
+}
+
+.footer p{
+
+line-height:30px;
+
+color:#d8d8d8;
+
+}
+
+.footer ul{
+
+list-style:none;
+
+}
+
+.footer ul li{
+
+margin:12px 0;
+
+}
+
+.footer ul li a{
+
+color:#d8d8d8;
+
+transition:.3s;
+
+}
+
+.footer ul li a:hover{
+
+color:#fff;
+
+padding-left:8px;
+
+}
+
+.footer-bottom{
+
+margin-top:40px;
+
+padding-top:20px;
+
+border-top:1px solid rgba(255,255,255,.15);
+
+text-align:center;
+
+font-size:15px;
+
+color:#cfcfcf;
+
+}
+
+/*==========================
+RESPONSIVE
+==========================*/
+
+@media(max-width:992px){
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.about-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero{
+
+padding:70px 20px;
+
+min-height:360px;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+line-height:30px;
+
+}
+
+.section-title h2{
+
+font-size:32px;
+
+}
+
+.about-card{
+
+padding:25px;
+
+}
+
+.team-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.team-card{
+
+padding:30px 20px;
+
+}
+
+.member-photo{
+
+width:120px;
+
+height:120px;
+
+}
+
+.footer{
+
+padding:45px 25px 20px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+ <!-- =========================
+        HERO SECTION
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Meet Our Development Team</h1>
+
+        <p>
+            We are Final Year BCA students from
+            <b>St. Columba's College, Hazaribagh</b>,
+            developing <b>AttendX</b> as our Major Project.
+            This project is designed to modernize attendance,
+            student management and academic resources using
+            modern web technologies.
+        </p>
+
+        <a href="#team" class="hero-btn">
+            Meet Our Team
+        </a>
+
+    </div>
+
+</section>
+
+<!-- =========================
+        ABOUT PROJECT
+========================= -->
+
+<section class="about">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>About The Project</h2>
+
+<p>
+AttendX is a modern AI-based Student Attendance &
+Department Management System created as a Semester VI
+Major Project.
+</p>
+
+</div>
+
+<div class="about-grid">
+
+<!-- LEFT -->
+
+<div class="about-card">
+
+<h3>Project Overview</h3>
+
+<p>
+
+AttendX has been developed to simplify attendance,
+department notices, study materials and student
+management into one platform.
+
+The system is designed with a modern interface,
+responsive layout and easy navigation to provide
+a better experience for students as well as faculty
+members.
+
+This project is developed by the students of
+<b>St. Columba's College</b> under
+<b>Vinoba Bhave University</b> as our
+Final Year Major Project.
+
+</p>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="about-card">
+
+<div class="info-box">
+
+<div class="info-icon">
+🎓
+</div>
+
+<div class="info-text">
+
+<h4>Course</h4>
+
+<span>Bachelor of Computer Applications</span>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="info-icon">
+🏫
+</div>
+
+<div class="info-text">
+
+<h4>College</h4>
+
+<span>St. Columba's College</span>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="info-icon">
+🏛️
+</div>
+
+<div class="info-text">
+
+<h4>University</h4>
+
+<span>Vinoba Bhave University</span>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="info-icon">
+💻
+</div>
+
+<div class="info-text">
+
+<h4>Technology</h4>
+
+<span>HTML • CSS • JavaScript • Django</span>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="info-icon">
+📅
+</div>
+
+<div class="info-text">
+
+<h4>Session</h4>
+
+<span>2023 – 2026</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+        TEAM SECTION
+========================= -->
+
+<section class="team" id="team">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Development Team</h2>
+
+<p>
+Meet the talented students behind the AttendX Project.
+</p>
+
+</div>
+
+<div class="team-grid">
+
+    <!-- Member 1 -->
+    <div class="team-card">
+
+        <div class="member-photo">
+            <img src="{% static 'assets/images/pic.jpeg'%}" alt="Rounak Raj">
+        </div>
+
+        <div class="member-name">Rounak Raj</div>
+
+        <div class="member-role">Full-Stack Developer</div>
+
+        <div class="member-phone">📞 +91 6201292180</div>
+
+    </div>
+
+    <!-- Member 2 -->
+    <div class="team-card">
+       
+        <div class="member-photo">
+            <img src="{% static 'assets/images/dhiraj.jpeg'%}" alt="Dhiraj Goswami">
+            <!-- <div class="empty-photo">👤</div> -->
+        </div>
+
+        <div class="member-name">Dhiraj Goswami</div>
+
+        <div class="member-role">Backend Developer</div>
+
+        <div class="member-phone">📞 +91 9523178652</div>
+
+    </div>
+
+    <!-- Member 3 -->
+    <div class="team-card">
+
+        <div class="member-photo">
+            <img src="{% static 'assets/images/pri.jpeg'%}" alt="Priyanshu Pandey">
+            <!-- <div class="empty-photo">👤</div> -->
+        </div>
+
+        <div class="member-name">Priyanshu Pandey</div>
+
+        <div class="member-role">Backend Developer</div>
+
+        <div class="member-phone">📞 +91 6207951610</div>
+
+    </div>
+
+    <!-- Member 4 -->
+    <div class="team-card">
+
+        <div class="member-photo">
+            <img src="{%static 'assets/images/Kaushal .jpeg' %}" alt="Kaushal Kumar Pandey">
+            <!-- <div class="empty-photo">👤</div> -->
+        </div>
+
+        <div class="member-name">Kaushal kumar Pandey</div>
+
+        <div class="member-role">Frontend Developer</div>
+
+        <div class="member-phone">📞 +91 7061541683</div>
+
+    </div>
+
+    <!-- Member 5 -->
+    <div class="team-card">
+
+        <div class="member-photo">
+             <img src="{%static 'assets/images/mit.jpeg' %}" alt="Mithun Kumar">
+            <!-- <div class="empty-photo">👤</div> -->
+        </div>
+
+        <div class="member-name">Mithun Kumar</div>
+
+        <div class="member-role">Frontend Developer</div>
+
+        <div class="member-phone">📞 +91 9279826876</div>
+
+    </div>
+
+    <!-- Member 6 -->
+    <div class="team-card">
+
+        <div class="member-photo">
+            <img src="{%static 'assets/images/nit.jpeg' %}" alt="Nitish Kumar">
+            <!-- <div class="empty-photo">👤</div> -->
+        </div>
+
+        <div class="member-name">Nitish kumar</div>
+
+        <div class="member-role">Frontend Developer</div>
+
+        <div class="member-phone">📞 +91 9835241862 </div>
+
+    </div>
+
+    <!-- Member 7 -->
+    <div class="team-card">
+
+        <div class="member-photo">
+            <img src="{%static 'assets/images/Ab.jpg' %}" alt="Abhishek yadav">
+            <!-- <div class="empty-photo">👤</div> -->
+        </div>
+
+        <div class="member-name">Abhishek Yadav</div>
+
+        <div class="member-role">Documentation</div>
+
+        <div class="member-phone">📞 +91 9128821795</div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3>AttendX</h3>
+
+            <p>
+
+                AttendX is a Final Year Major Project developed
+                by BCA students of St. Columba's College,
+                Hazaribagh under Vinoba Bhave University.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Project</h3>
+
+            <ul>
+
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Team</a></li>
+
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3>Technology</h3>
+
+            <ul>
+
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>Django</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 AttendX • Developed by BCA Final Year Students • All Rights Reserved.
+
+    </div>
+
+</footer>
+
+</body>
+</html>

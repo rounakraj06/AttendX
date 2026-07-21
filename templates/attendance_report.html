@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attendance Report</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.container{
+max-width:1000px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+color:#2563eb;
+margin-bottom:30px;
+}
+
+.filter-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+select,
+input{
+width:100%;
+padding:11px;
+border:1px solid #ccc;
+border-radius:8px;
+outline:none;
+}
+
+button{
+margin-top:25px;
+width:100%;
+padding:13px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.report{
+margin-top:40px;
+}
+
+.summary{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:15px;
+margin-bottom:25px;
+}
+
+.card{
+flex:1;
+min-width:180px;
+background:#f8fafc;
+padding:18px;
+border-radius:10px;
+text-align:center;
+border-left:4px solid #2563eb;
+}
+
+.card h2{
+color:#2563eb;
+margin-bottom:8px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table th{
+background:#2563eb;
+color:#fff;
+padding:12px;
+}
+
+table td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+.pdf-btn{
+margin-top:25px;
+display:inline-block;
+padding:12px 20px;
+background:#16a34a;
+color:#fff;
+text-decoration:none;
+border-radius:8px;
+}
+
+@media(max-width:768px){
+
+.container{
+margin:15px;
+padding:20px;
+}
+
+.summary{
+flex-direction:column;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Attendance Report</h1>
+
+<form method="GET">
+
+<div class="filter-box">
+
+<div>
+
+<label>Semester</label>   
+
+<select name="semester">
+    <option value="1">Semester 1</option>
+    <option value="2">Semester 2</option>
+    <option value="3">Semester 3</option>
+    <option value="4">Semester 4</option>
+    <option value="5">Semester 5</option>
+    <option value="6">Semester 6</option>
+</select>
+</div>
+
+<div>
+
+<label>Subject</label>   
+
+<select name="subject">
+
+<option value="">All Subjects</option>
+<option value="Mathematics">Mathematics</option>
+<option value="Programming in C">Programming in C</option>
+<option value="DBMS">DBMS</option>
+<option value="Operating System">Operating System</option>
+<option value="Linux">Linux</option>
+
+</select>
+</div>
+
+<div>
+<label>Report Type</label>
+
+<select name="report_type" id="reportType">
+
+<option value="today">Today's Report</option>
+<option value="date">Date Wise</option>
+<option value="monthly">Monthly Report</option>
+<option value="semester">Semester Report</option>
+
+</select>
+
+</div>
+
+<div id="dateBox">
+
+<label>Select Date</label>
+
+<input type="date" name="date">
+
+</div>
+
+</div>
+
+<button type="submit">
+
+Generate Report
+
+</button>
+
+<div class="report" id="report">
+
+<div class="summary">
+
+<div class="card">
+<h2>{{ total_students }}</h2>
+<p>Total Students</p>
+</div>
+
+<div class="card">
+<h2>{{ present_students }}</h2>
+<p>Present</p>
+</div>
+
+<div class="card">
+<h2>{{ absent_students }}</h2>
+<p>Absent</p>
+</div>
+
+<div class="card">
+<h2>{{ attendance_percentage }}%</h2>
+<p>Attendance</p>
+</div>
+
+</div>
+
+<h2 style="margin-bottom:15px;">Attendance Report</h2>
+
+<table>
+
+<tr>
+
+<th>Roll No</th>
+<th>Student Name</th>
+<th>Maths</th>
+<th>Programming in C</th>
+<th>DBMS</th>
+<th>Operating System</th>
+<th>Linux</th>
+<th>Total</th>
+<th>Present</th>
+<th>%</th>
+<th>Status</th>
+
+</tr>
+
+{% for student in students %}
+
+<tr>
+
+<td>{{ student.roll_number }}</td>
+<td>{{ student.full_name }}</td>
+
+<td>{{ student.maths }}</td>
+<td>{{ student.c }}</td>
+<td>{{ student.dbms }}</td>
+<td>{{ student.os }}</td>
+<td>{{ student.linux }}</td>
+
+<td>{{ student.total }}</td>
+<td>{{ student.present }}</td>
+<td>{{ student.percentage }}%</td>
+
+<td>
+{% if student.percentage >= 75 %}
+<span style="color:green;">Eligible</span>
+{% else %}
+<span style="color:red;">Not Eligible</span>
+{% endif %}
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="11">No Record Found</td>
+</tr>
+
+{% endfor %}
+
+</table>
+</form>
+<a href="#" class="pdf-btn">
+
+📄 Download PDF
+
+</a>
+
+</div>
+
+<script>
+
+const reportType = document.getElementById("reportType");
+const dateBox = document.getElementById("dateBox");
+
+reportType.addEventListener("change", function () {
+
+    if (this.value === "monthly" || this.value === "semester") {
+        dateBox.style.display = "none";
+    } else {
+        dateBox.style.display = "block";
+    }
+
+});
+
+reportType.dispatchEvent(new Event("change"));
+
+</script>
+
+</div>
+
+</body>
+</html>

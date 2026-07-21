@@ -1,0 +1,373 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AttendX | Manual Attendance</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#f3f6fb;
+padding:40px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+h1{
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.subtitle{
+color:#666;
+margin-bottom:30px;
+}
+
+.message{
+padding:12px;
+margin-bottom:20px;
+border-radius:8px;
+font-weight:600;
+}
+
+.success{
+background:#dcfce7;
+color:#166534;
+}
+
+.error{
+background:#fee2e2;
+color:#b91c1c;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+font-weight:600;
+margin-bottom:8px;
+}
+
+input,
+select{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+outline:none;
+}
+
+input:focus,
+select:focus{
+border-color:#2563eb;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.profile{
+margin-top:35px;
+padding:25px;
+background:#eff6ff;
+border-left:5px solid #2563eb;
+border-radius:10px;
+}
+
+.profile h2{
+margin-bottom:20px;
+color:#1e3a8a;
+}
+
+.profile p{
+margin:10px 0;
+font-size:15px;
+}
+
+.back-btn{
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+color:#2563eb;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="{% url 'teacher_dashboard' %}" class="back-btn">
+<i class="fa-solid fa-arrow-left"></i>
+Back to Dashboard
+</a>
+
+<h1>
+<i class="fa-solid fa-user-check"></i>
+Manual Attendance
+</h1>
+
+<p class="subtitle">
+Mark attendance manually if Face Attendance fails.
+</p>
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="message {% if message.tags == 'success' %}success{% else %}error{% endif %}">
+{{ message }}
+</div>
+
+{% endfor %}
+{% endif %}
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="form-group">
+
+<label>Class Roll Number</label>
+
+<input
+type="number"
+name="roll"
+placeholder="Enter Class Roll Number"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Semester</label>
+
+<select
+name="semester"
+id="semester"
+required>
+
+<option value="">Select Semester</option>
+
+<option value="1">Semester 1</option>
+<option value="2">Semester 2</option>
+<option value="3">Semester 3</option>
+<option value="4">Semester 4</option>
+<option value="5">Semester 5</option>
+<option value="6">Semester 6</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Subject</label>
+
+<select
+name="subject"
+id="subject"
+required>
+
+<option value="">Select Subject</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Status</label>
+
+<select
+name="status"
+required>
+
+<option value="Present">Present</option>
+<option value="Absent">Absent</option>
+<option value="Late">Late</option>
+
+</select>
+
+</div>
+
+<button type="submit">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Attendance
+
+</button>
+
+</form>
+
+<hr style="margin:35px 0;">
+
+<div class="profile">
+
+<h2>Student Information</h2>
+
+<p><strong>Name :</strong>
+{% if student %}
+{{ student.full_name }}
+{% else %}
+-
+{% endif %}
+</p>
+
+<p><strong>Roll Number :</strong>
+{% if student %}
+{{ student.class_roll_number }}
+{% else %}
+-
+{% endif %}
+</p>
+
+<p><strong>Semester :</strong>
+{% if student %}
+{{ student.semester }}
+{% else %}
+-
+{% endif %}
+</p>
+
+<p><strong>Status :</strong>
+
+{% if student %}
+
+🟢 Active
+
+{% else %}
+
+-
+
+{% endif %}
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+const semester = document.getElementById("semester");
+const subject = document.getElementById("subject");
+
+const subjects = {
+
+1:[
+"Programming in C",
+"Mathematics-I",
+"Digital Electronics",
+"Computer Fundamentals",
+"Communication Skills"
+],
+
+2:[
+"Data Structure",
+"Mathematics-II",
+"Operating System",
+"Database Management System",
+"Environmental Studies"
+],
+
+3:[
+"Python Programming",
+"Computer Networks",
+"Software Engineering",
+"Java Programming",
+"Web Technology"
+],
+
+4:[
+"PHP Programming",
+"Linux Operating System",
+"Computer Graphics",
+"Numerical Methods",
+"Microprocessor"
+],
+
+5:[
+"Artificial Intelligence",
+"Compiler Design",
+"Computer Security",
+"Data Mining",
+"Project"
+],
+
+6:[
+"Machine Learning",
+"Cloud Computing",
+"Internet of Things",
+"Mobile Application Development",
+"Major Project"
+]
+
+};
+
+semester.addEventListener("change",function(){
+
+subject.innerHTML="<option value=''>Select Subject</option>";
+
+let sem=this.value;
+
+if(subjects[sem]){
+
+subjects[sem].forEach(function(item){
+
+let option=document.createElement("option");
+
+option.value=item;
+
+option.text=item;
+
+subject.appendChild(option);
+
+});
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
