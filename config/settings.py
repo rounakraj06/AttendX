@@ -26,15 +26,14 @@ SECRET_KEY = 'django-insecure-es1fw%sc=@1^)iz87yp!v!@x4y#r-#9r-(jw6*pq8%jw5^1p#m
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "attendx-xuvm.onrender.com",
+    "attendx-1-ytgn.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://attendx-xuvm.onrender.com",
+    "https://attendx-1-ytgn.onrender.com",
 ]
-
 # Application definition
 
 INSTALLED_APPS = [
