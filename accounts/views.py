@@ -884,7 +884,7 @@ def face_attendance(request):
         return redirect("student_dashboard")
 
         matched, message = verify_face(
-            student.profile_photo.path,
+            student.profile_photo.url
             image_data
         )
 
