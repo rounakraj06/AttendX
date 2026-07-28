@@ -91,7 +91,7 @@ e.preventDefault();
 // Sidebar Toggle (Mobile)
 // ==============================
 
-const menuBtn=document.getElementById(".menu-btn");
+const menuBtn=document.getElementById("menu-btn");
 const sidebar=document.querySelector(".sidebar");
 
 if(menuBtn && sidebar){
