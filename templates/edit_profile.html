@@ -6,9 +6,13 @@
 
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 <title>Edit Profile</title>
 
 <style>
+    
 
 body{
 background:#f4f7fb;
@@ -16,9 +20,10 @@ font-family:Arial;
 }
 
 .container{
-width:500px;
-margin:40px auto;
-background:white;
+width:100%;
+/* margin:40px auto; */
+max-width: 500px;
+background:#fff;
 padding:30px;
 border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,.1);
@@ -43,6 +48,60 @@ cursor:pointer;
 
 a{
 text-decoration:none;
+}
+
+/* ===========================
+   MOBILE RESPONSIVE
+=========================== */
+
+@media (max-width:768px){
+
+body{
+    margin:0;
+    padding:0;
+}
+
+.container{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:20px;
+    border-radius:10px;
+    box-shadow: none;
+}
+
+h2{
+    text-align:center;
+    /* font-size:24px; */
+    margin-bottom:20px;
+}
+
+input,
+textarea{
+    width:100%;
+    font-size:16px;
+    padding:12px;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    font-size:16px;
+    /* margin-top:10px; */
+}
+
+a{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    /* font-size:16px; */
+}
+
 }
 
 </style>

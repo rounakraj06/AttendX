@@ -9,6 +9,10 @@ menuBtn.addEventListener("click", () => {
 
     sidebar.classList.toggle("active");
 
+    if (sidebar.classList.contains("active")) {
+        menuBtn.style.display = "none";
+    }
+
 });
 
 // =====================================
@@ -50,6 +54,7 @@ document.addEventListener("click",(e)=>{
         ){
 
             sidebar.classList.remove("active");
+            menuBtn.style.display = "flex";
 
         }
 

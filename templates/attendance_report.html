@@ -22,8 +22,9 @@ background:#f4f6f9;
 }
 
 .container{
-max-width:1000px;
-margin:40px auto;
+width:calc(100% - 40px);
+max-width:none;
+margin:20px;
 background:#fff;
 padding:30px;
 border-radius:12px;
@@ -62,7 +63,7 @@ margin-top:25px;
 width:100%;
 padding:13px;
 background:#2563eb;
-color:white;
+color:#fff;
 border:none;
 border-radius:8px;
 font-size:16px;
@@ -128,21 +129,50 @@ text-decoration:none;
 border-radius:8px;
 }
 
+/* ========= Mobile ========= */
+
 @media(max-width:768px){
 
 .container{
+width:calc(100% - 30px);
 margin:15px;
 padding:20px;
+}
+
+h1{
+font-size:28px;
+}
+
+.filter-box{
+grid-template-columns:1fr;
 }
 
 .summary{
 flex-direction:column;
 }
 
+.card{
+min-width:100%;
+}
+
+.table-responsive{
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+}
+
+.table-responsive table{
+min-width:900px;
+}
+
+.pdf-btn{
+width:100%;
+display:block;
+text-align:center;
+}
+
 }
 
 </style>
-
 </head>
 
 <body>
@@ -243,6 +273,8 @@ Generate Report
 
 <h2 style="margin-bottom:15px;">Attendance Report</h2>
 
+<div class="table-responsive">
+
 <table>
 
 <tr>
@@ -297,6 +329,8 @@ Generate Report
 {% endfor %}
 
 </table>
+
+</div>
 </form>
 <a href="#" class="pdf-btn">
 

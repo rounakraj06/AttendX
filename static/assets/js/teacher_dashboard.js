@@ -28,7 +28,6 @@ this.style.background="#16a34a";
 
 }
 
-
 // ==============================
 // Sidebar Active Menu
 // ==============================
@@ -92,7 +91,7 @@ e.preventDefault();
 // Sidebar Toggle (Mobile)
 // ==============================
 
-const menuBtn=document.querySelector(".menu-btn");
+const menuBtn=document.getElementById(".menu-btn");
 const sidebar=document.querySelector(".sidebar");
 
 if(menuBtn && sidebar){

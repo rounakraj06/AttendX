@@ -22,9 +22,9 @@
      Mobile Menu
 ========================== -->
 
-<div class="menu-btn" id="menuBtn">
+<!-- <div class="menu-btn" id="menuBtn">
     <i class="fa-solid fa-bars"></i>
-</div>
+</div> -->
 
 <!-- ==========================
      Sidebar
@@ -104,6 +104,9 @@
 ========================== -->
 
 <div class="topbar">
+    <div class="menu-btn" id="menuBtn">
+    <i class="fa-solid fa-bars"></i>
+</div>
 
     <div class="student-info">
 
@@ -125,13 +128,19 @@
 
     </div>
 
-    <div class="time-box">
+    <!-- <div class="time-box">
+        <div class="date-time">
+            <span class="date" id="currentDate"></span>
+            <span class="divider"></span>
+            <span class="time" id="currentTime"></span>
 
-        <p id="currentDate"></p>
+        </div>
 
-        <h3 id="currentTime"></h3>
-
-    </div>
+    </div> -->
+    
+<!-- <div class="menu-btn" id="menuBtn">
+    <i class="fa-solid fa-bars"></i>
+</div> -->
 
 </div>
 
@@ -159,7 +168,7 @@
 
             <p><b>Attended :</b> {{ present_classes }}</p>
 
-            <p><b>Absent :</b> {{ absent_classes }}</p>
+            <!-- <p><b>Absent :</b> {{ absent_classes }}</p> -->
 
             {% if attendance_percentage >= 75 %}
 

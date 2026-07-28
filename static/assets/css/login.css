@@ -84,26 +84,25 @@ body{
 
 .tabs{
     display:flex;
+    justify-content:center;
     margin-bottom:30px;
-    border-radius:10px;
-    overflow:hidden;
-    background:#f3f4f6;
+    background:transparent;
 }
 
 .tab-btn{
-    flex:1;
-    padding:14px;
+    padding:0;
     border:none;
     background:transparent;
-    cursor:pointer;
-    font-size:16px;
+    color:#2563eb;
+    cursor:default;
+    font-size:24px;
     font-weight:600;
-    transition:.3s;
+    text-align: center;
 }
 
 .tab-btn.active{
-    background:#2563eb;
-    color:#fff;
+    background:transparent;
+    color:#2563eb;
 }
 
 .login-right h2{
