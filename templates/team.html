@@ -573,6 +573,48 @@ color:#cfcfcf;
 
 }
 
+/* ===== Team Lead Ribbon ===== */
+
+.leader-card{
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #2563eb;
+    transition: .4s;
+}
+
+.leader-card:hover{
+    transform: translateY(-12px);
+    box-shadow: 0 25px 60px rgba(37,99,235,.25);
+}
+
+.leader-ribbon{
+    position:absolute;
+    top:18px;
+    left:-42px;
+    width:160px;
+    background:linear-gradient(135deg,#2563eb,#4f8cff);
+    color:#fff;
+    text-align:center;
+    font-size:13px;
+    font-weight:700;
+    padding:8px 0;
+    transform:rotate(-45deg);
+    letter-spacing:2px;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+    z-index:10;
+    text-transform:uppercase;
+}
+
+.leader-ribbon::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:2px;
+    background:rgba(255,255,255,.4);
+}
+
 /*==========================
 RESPONSIVE
 ==========================*/
@@ -859,7 +901,9 @@ Meet the talented students behind the AttendX Project.
 <div class="team-grid">
 
     <!-- Member 1 -->
-    <div class="team-card">
+    <div class="team-card leader-card">
+
+        <span class="leader-ribbon">TEAM LEAD</span>
 
         <div class="member-photo">
             <img src="{% static 'assets/images/pic.jpeg'%}" alt="Rounak Raj">
