@@ -1,6 +1,11 @@
 # AttendX — Smart Attendance Management System
 
 > A full-stack attendance management platform built to simplify academic attendance, student management, and teacher workflows with a focus on automation and face-recognition-based attendance.
+>
+> ## 🌐 Live Demo
+
+- **Student Portal:** [Open Student Portal](https://attendx-1-ytgn.onrender.com)
+- **Teacher Portal:** [Open Teacher Portal](https://attendx-1-ytgn.onrender.com/teacher_login/)
 
 ## 🚀 About AttendX
 
