@@ -70,7 +70,6 @@ This project was designed and developed as a real-world BCA project with a focus
 
 <p align="center">
   <img src="screenshots/home.png" width="48%" />
-  <img src="screenshots/home-live.png" width="48%" />
 </p>
 
 ### 👨‍🎓 Student Dashboard
