@@ -124,6 +124,49 @@ This project was designed and developed as a real-world BCA project with a focus
 
 ## 🏗️ Project Structure
 
+## 🔄 How AttendX Works
+
+AttendX connects students, teachers, attendance sessions, academic records, and learning resources into a single web-based platform.
+
+```text
+                    ┌─────────────────────┐
+                    │       AttendX       │
+                    │   Web Application   │
+                    └──────────┬──────────┘
+                               │
+              ┌────────────────┴────────────────┐
+              │                                 │
+      ┌───────▼────────┐               ┌────────▼────────┐
+      │ Student Portal │               │ Teacher Portal  │
+      └───────┬────────┘               └────────┬────────┘
+              │                                 │
+       ┌──────▼───────┐                  ┌──────▼─────────┐
+       │   Student    │                  │    Manage      │
+       │ Authentication│                  │    Students    │
+       └──────┬───────┘                  └──────┬─────────┘
+              │                                 │
+       ┌──────▼────────────┐             ┌──────▼─────────┐
+       │ Attendance &      │             │ Attendance     │
+       │ Academic Records  │             │ Sessions       │
+       └──────┬────────────┘             └──────┬─────────┘
+              │                                 │
+              │                         ┌───────▼─────────┐
+              │                         │ Face Recognition│
+              │                         │    Workflow     │
+              │                         └───────┬─────────┘
+              │                                 │
+              └────────────────┬────────────────┘
+                               │
+                      ┌────────▼────────┐
+                      │ Django Backend  │
+                      │ + Database      │
+                      └────────┬────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │ Attendance Records │
+                    │ Marks & Resources  │
+                    └─────────────────────┘
+
 ```text
 AttendX/
 ├── accounts/              # Application logic, models and views
