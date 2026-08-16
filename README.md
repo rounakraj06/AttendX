@@ -63,6 +63,43 @@ This project was designed and developed as a real-world BCA project with a focus
 - Profile management
 - Password management
 - Role-based dashboard experience
+  
+## 📸 Project Screenshots
+
+### 🏠 Home & Student Experience
+
+<p align="center">
+  <img src="screenshots/home.png" width="48%" />
+  <img src="screenshots/home-live.png" width="48%" />
+</p>
+
+### 👨‍🎓 Student Dashboard
+
+<p align="center">
+  <img src="screenshots/student-dashboard.png" width="48%" />
+  <img src="screenshots/attendance.png" width="48%" />
+</p>
+
+### 🤖 Face Recognition Attendance
+
+<p align="center">
+  <img src="screenshots/face-attendance.png" width="48%" />
+  <img src="screenshots/face-attendance-session.png" width="48%" />
+</p>
+
+### 👨‍🏫 Teacher Portal
+
+<p align="center">
+  <img src="screenshots/teacher-login.png" width="48%" />
+  <img src="screenshots/teacher-dashboard.png" width="48%" />
+</p>
+
+### 📚 Academic Resources
+
+<p align="center">
+  <img src="screenshots/library.png" width="48%" />
+  <img src="screenshots/marks.png" width="48%" />
+</p>
 
 ## 🛠️ Technology Stack
 
