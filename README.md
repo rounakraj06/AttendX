@@ -7,6 +7,12 @@
 - **Student Portal:** [Open Student Portal](https://attendx-1-ytgn.onrender.com)
 - **Teacher Portal:** [Open Teacher Portal](https://attendx-1-ytgn.onrender.com/teacher_login/)
 
+## 🎥 Face Recognition Demo
+
+Watch the AttendX face-recognition attendance workflow in action.
+
+▶️ **[Watch Face Recognition Attendance Demo](https://drive.google.com/file/d/1oSQURsWVZwmFL3uEn9FAwSf77JyiQ-vX/view?usp=drive_link)** 
+
 ## 🚀 About AttendX
 
 AttendX is a web-based academic management project designed to make everyday attendance management more organized, accessible, and efficient.
